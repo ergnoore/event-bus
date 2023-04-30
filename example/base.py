@@ -3,11 +3,12 @@ import datetime as dt
 
 from dataclasses import dataclass
 
-from eventor import event_bus
+from eventor import DefaultEventBus
 
 
 async def main() -> None:
 
+    event_bus = DefaultEventBus()
     @dataclass(frozen=True)
     class UserCreatedDomainEvent:
         user_id: str

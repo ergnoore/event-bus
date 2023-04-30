@@ -21,7 +21,7 @@ async def main() -> None:
     async def email_user_created_event_handler(event: UserCreatedDomainEvent) -> None:
         print(f"Send email: <Hello, '{event.name}'>.")
 
-    event = UserCreatedDomainEvent(user_id="1", name="Steve Buscemi", created_at=dt.datetime.now())
+    event = UserCreatedDomainEvent(user_id="1", name="Don McLean", created_at=dt.datetime.now())
     await event_bus.publish(event)
 
 
@@ -29,7 +29,6 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
     loop.close()
-
 ```
 
 
@@ -55,11 +54,12 @@ import datetime as dt
 
 from dataclasses import dataclass
 
-from eventor import event_bus
+from eventor import DefaultEventBus
 
 
 async def main() -> None:
 
+    event_bus = DefaultEventBus()
     @dataclass(frozen=True)
     class UserCreatedDomainEvent:
         user_id: str
